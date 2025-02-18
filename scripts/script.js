@@ -13,7 +13,16 @@ document.getElementById('signupForm')?.addEventListener('submit', function (e) {
     return; // Stop form submission
   }
 
-  // Simulate signup (replace with actual signup logic)
+  // Save user data to localStorage
+  const user = {
+    name: name,
+    email: email,
+    password: password,
+  };
+
+  // Save the user object to localStorage
+  localStorage.setItem('user', JSON.stringify(user));
+
   alert('Signup successful! Please log in.');
   window.location.href = 'login.html'; // Redirect to login page
 });
@@ -24,8 +33,11 @@ document.getElementById('loginForm')?.addEventListener('submit', function (e) {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  // Simulate login (replace with actual authentication logic)
-  if (email === 'user@example.com' && password === 'password') {
+  // Retrieve user data from localStorage
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  // Check if the email and password match
+  if (user && user.email === email && user.password === password) {
     localStorage.setItem('isLoggedIn', 'true');
     window.location.href = 'dashboard.html'; // Redirect to dashboard
   } else {
